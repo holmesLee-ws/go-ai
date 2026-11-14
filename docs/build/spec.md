@@ -54,7 +54,7 @@
 
 go-develop이 2026-11-08 문서로 확인한 사실을 그대로 쓴다. Desktop은 CLI와 같은 설정·스킬을 읽는다. `permissions.allow`는 신뢰 대화상자를 수락한 뒤에만 적용된다. `Edit(...)`은 쓰기를 포함한다. CLI에는 자동 미리보기가 없어 OS 열기 명령을 쓴다. 이 리포에서 더 실측해 적는 것:
 
-- (G2) WebFetch가 law.go.kr·likms.assembly.go.kr·eur-lex·nist.gov 본문을 읽는지. 못 읽으면 튜터 지침에 대체 경로를 고정한다. 대체 경로는 다른 공식 미러, 검색 결과의 공식 페이지 인용, 「지금 확인하지 못함」 명시다.
+- (2026-11-14 G2 실측) 튜터의 웹 읽기는 web-fetch 하위 에이전트를 거친다. 읽힘: elaw.klri.re.kr 본문(lawViewMultiContent), fsc.go.kr 보도자료, nist.gov. 안 읽힘: law.go.kr(점검), likms.assembly.go.kr(스크립트 화면), EUR-Lex ELI·EU 출판국 Cellar 주소(목차나 RDF만), msit.go.kr 보도자료 본문(「첨부 참고」뿐). 그래서 `tutor/legal-facts.md`에 대체 경로(elaw 본문, 실패 시 `sources.md` 값+조회일+「재확인 못 함」)를 고정했다.
 - (2026-11-14 실측) G3 격리: `--setting-sources project`만으로는 `~/.claude/rules/`가 여전히 로드된다. `--settings`의 `claudeMdExcludes`로 사용자 수준 CLAUDE.md·rules를 빼야 로드되지 않는다.
 - (2026-11-14) law.go.kr은 11-13 21:00~11-14 21:00 정기 점검 중이었다. 그동안은 국회법률정보시스템 등 공식 미러로 확인하고, 점검이 끝나면 law.go.kr로 다시 확인한다.
 
