@@ -68,6 +68,7 @@ function parseCurriculum(text, sourceIds) {
       const f = line.match(/^- ([^:]+): (.*)$/);
       if (!f) { problems.push(`${id}: 정해진 칸 밖의 줄 — ${line.slice(0, 30)}`); continue; }
       if (![...FIELDS, ...OPTIONAL].includes(f[1])) { problems.push(`${id}: 정해진 칸이 아님 「${f[1]}」`); continue; }
+      if (f[1] in fields) problems.push(`${id}: 「${f[1]}」 칸이 두 번 있음`);
       fields[f[1]] = f[2].trim();
     }
     for (const name of FIELDS) if (!fields[name]) problems.push(`${id}: 「${name}」 없음`);
@@ -95,7 +96,7 @@ function parseCurriculum(text, sourceIds) {
   return { modules, problems };
 }
 
-// 조문 표기는 같은 줄에서 바로 뒤에 오는 [Sx] 출처 블록에 같은 조문(경계 일치)이 있어야 한다(R11 ③).
+// 호·목 단위는 대조하지 않는다(조 단위까지만). 조문 표기는 같은 줄에서 바로 뒤에 오는 [Sx] 출처 블록에 같은 조문(경계 일치)이 있어야 한다(R11 ③).
 function crossCheckArticles(name, text, sources) {
   const problems = [];
   for (const line of text.split("\n")) {
